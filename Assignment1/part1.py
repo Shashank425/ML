@@ -102,10 +102,11 @@ class MLR:
     def checkRmseR2(self,test_x,test_y,h):
         test_y_pred = []
         tss = 0
+        rss = 0
         for index,row in test_x.iterrows():
             test_y_pred.append(self.pred(row[0],row[1],row[2],row[3],h))
         for i,y_pred in enumerate(test_y_pred):
-            rss = np.sum(np.power((y_pred-test_y["ale"].iloc[i]),2))
+            rss = rss + np.power((y_pred-test_y["ale"].iloc[i]),2)
         for i in range(test_y.shape[0]):
             tss = tss + np.power((test_y["ale"].iloc[i] - np.mean(test_y['ale'])),2)
         
